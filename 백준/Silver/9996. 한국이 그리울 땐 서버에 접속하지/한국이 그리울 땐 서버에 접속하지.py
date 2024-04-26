@@ -6,17 +6,16 @@ suf = pattern[s+1:]
 files = [list(input()) for _ in range(N)]
 for file in files:
     if len(file) >= len(prev) + len(suf):
-        if len(file) > len(prev):
-            check = 'DA'
-            for i in range(len(prev)): # * 앞
-                if file[i] != prev[i]:
+        check = 'DA'
+        for i in range(len(prev)): # * 앞
+            if file[i] != prev[i]:
+                check = 'NE'
+                break
+        if check == 'DA':
+            for i in range(-1, -len(suf) - 1, -1):  # * 뒤
+                if file[i] != pattern[i]:
                     check = 'NE'
                     break
-            if check == 'DA' and len(file) > len(suf):
-                for i in range(-1, -len(suf) - 1, -1):  # * 뒤
-                    if file[i] != pattern[i]:
-                        check = 'NE'
-                        break
-            print(check)
+        print(check)
     else:
         print('NE')
